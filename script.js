@@ -209,6 +209,7 @@ document.body.onload = () => {
                 quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
                 inputs.forEach((el) => {
                     el.style.accentColor = "inherit"
+                    el.dataset.isGuessed = false
                     el.checked = false
                 })
                 return;
@@ -216,7 +217,8 @@ document.body.onload = () => {
 
             if (selectedIndex === currentWantedIndex) {
                 quizMessageElement.innerText = ""
-                el.style.accentColor = "green"
+                el.style.accentColor = "lime"
+                el.dataset.isGuessed = true
                 currentWantedIndex++
                 quizTargetName.innerText = data[currentWantedIndex].name
                 quizQuestionCount.innerText = currentWantedIndex + '/' + data.length

@@ -221,7 +221,7 @@ document.body.onload = () => {
                 quizTargetName.innerText = data[currentWantedIndex].name
                 quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
             } else {
-                quizMessageElement.innerText = "Špatně"
+                quizMessageElement.innerText = `Špatně (${data[selectedIndex].name})`
                 el.checked = false
             }
 

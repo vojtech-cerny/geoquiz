@@ -179,6 +179,7 @@ document.body.onload = () => {
     let inputsParent = document.querySelector("#quizInputWrapper")
     let quizTargetName = document.querySelector("#quizTargetName")
     let quizMessageElement = document.querySelector("#quizMessage")
+    let quizQuestionCount = document.querySelector("#quizQuestionCount")
 
     let imgX = bg.offsetWidth
     let imgY = bg.offsetHeight
@@ -203,7 +204,9 @@ document.body.onload = () => {
 
             if (selectedIndex === data.length - 1) {
                 alert("Jsi u konce!")
-                currentWantedIndex === 0;
+                currentWantedIndex = 0;
+                quizTargetName.innerText = data[currentWantedIndex].name
+                quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
                 inputs.forEach((el) => {
                     el.style.accentColor = "inherit"
                     el.checked = false
@@ -216,6 +219,7 @@ document.body.onload = () => {
                 el.style.accentColor = "green"
                 currentWantedIndex++
                 quizTargetName.innerText = data[currentWantedIndex].name
+                quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
             } else {
                 quizMessageElement.innerText = "Špatně"
                 el.checked = false
@@ -225,6 +229,7 @@ document.body.onload = () => {
     });
 
     quizTargetName.innerText = data[currentWantedIndex].name
+    quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
 }
 
 onresize = () => {

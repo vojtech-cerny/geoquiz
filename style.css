@@ -11,9 +11,6 @@ body {
 img {
     max-height: 90vh;
     max-width: 100vw;
-    position: absolute;
-    top: 0;
-    bottom: 0;
 }
 
 #quizInputWrapper {
@@ -23,13 +20,11 @@ img {
 }
 
 #quizNameInput, #quizBottomPart {
-    position: absolute;
-    top: 90vh;
     margin-top: 1rem;
 }
 
 input[type="radio"] {
-    transform: scale(2);
+    transform: scale(1.5);
 }
 
 #quizMessage {
@@ -43,6 +38,6 @@ small, small > a {
 }
 
 small {
-    position: absolute;
+    position: fixed;
     bottom: 0;
 }

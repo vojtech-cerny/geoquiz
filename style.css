@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+img {
+    max-height: 90vh;
+    max-width: 100vw;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+#quizInputWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#quizNameInput, #quizBottomPart {
+    position: absolute;
+    top: 90vh;
+    margin-top: 1rem;
+}
+
+input[type="radio"] {
+    transform: scale(2);
+}
+
+#quizMessage {
+    color: red;
+    float: right;
+    margin-left: 2rem;
+}
+
+small, small > a {
+    color: #454545;
+}
+
+small {
+    position: absolute;
+    bottom: 0;
+}

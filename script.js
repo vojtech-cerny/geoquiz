@@ -171,6 +171,23 @@ addEventListener("mousedown", function (e) {
 
 }, true)*/
 
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
 
 let currentWantedIndex = 0;
 
@@ -180,6 +197,7 @@ document.body.onload = () => {
     let quizTargetName = document.querySelector("#quizTargetName")
     let quizMessageElement = document.querySelector("#quizMessage")
     let quizQuestionCount = document.querySelector("#quizQuestionCount")
+    let shuffledData = [...shuffle(data)]
 
     let imgX = bg.offsetWidth
     let imgY = bg.offsetHeight
@@ -187,7 +205,7 @@ document.body.onload = () => {
     inputsParent.style.width = `${imgX}px`
     inputsParent.style.height = `${imgY}px`
 
-    data.map((point, i) => {
+    shuffledData.map((point,i) => {
         let input = document.createElement("input")
         input.type = "radio"
         input.name = i
@@ -205,8 +223,8 @@ document.body.onload = () => {
             if (selectedIndex === data.length - 1) {
                 alert("Jsi u konce!")
                 currentWantedIndex = 0;
-                quizTargetName.innerText = data[currentWantedIndex].name
-                quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
+                quizTargetName.innerText = shuffledData[currentWantedIndex].name
+                quizQuestionCount.innerText = currentWantedIndex + '/' + shuffledData.length
                 inputs.forEach((el) => {
                     el.style.accentColor = "inherit"
                     el.dataset.isGuessed = false
@@ -220,18 +238,18 @@ document.body.onload = () => {
                 el.style.accentColor = "lime"
                 el.dataset.isGuessed = true
                 currentWantedIndex++
-                quizTargetName.innerText = data[currentWantedIndex].name
-                quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
+                quizTargetName.innerText = shuffledData[currentWantedIndex].name
+                quizQuestionCount.innerText = currentWantedIndex + '/' + shuffledData.length
             } else {
-                quizMessageElement.innerText = `Špatně (${data[selectedIndex].name})`
+                quizMessageElement.innerText = `Špatně (${shuffledData[selectedIndex].name})`
                 el.checked = false
             }
 
         });
     });
 
-    quizTargetName.innerText = data[currentWantedIndex].name
-    quizQuestionCount.innerText = currentWantedIndex + '/' + data.length
+    quizTargetName.innerText = shuffledData[currentWantedIndex].name
+    quizQuestionCount.innerText = currentWantedIndex + '/' + shuffledData.length
 }
 
 onresize = () => {

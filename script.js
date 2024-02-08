@@ -1,4 +1,4 @@
-const data = [
+const data1 = [
     {
         "x": 0.35,
         "y": 0.71,
@@ -131,6 +131,119 @@ const data = [
     }
 ]
 
+let data2 = [
+    {
+        "x": 0.5,
+        "y": 0.15,
+        "name": "Jerevan"
+    },
+    {
+        "x": 0.65,
+        "y": 0.14,
+        "name": "Baku"
+    },
+    {
+        "x": 0.67,
+        "y": 0.54,
+        "name": "Manáma"
+    },
+    {
+        "x": 0.51,
+        "y": 0.11,
+        "name": "Tbilisi"
+    },
+    {
+        "x": 0.5,
+        "y": 0.34,
+        "name": "Bagdád"
+    },
+    {
+        "x": 0.69,
+        "y": 0.27,
+        "name": "Teherán"
+    },
+    {
+        "x": 0.25,
+        "y": 0.39,
+        "name": "Jeruzalém"
+    },
+    {
+        "x": 0.24,
+        "y": 0.38,
+        "name": "Tel Aviv"
+    },
+    {
+        "x": 0.5,
+        "y": 0.85,
+        "name": "San'á"
+    },
+    {
+        "x": 0.27,
+        "y": 0.38,
+        "name": "Ammán"
+    },
+    {
+        "x": 0.69,
+        "y": 0.58,
+        "name": "Dauhá"
+    },
+    {
+        "x": 0.6,
+        "y": 0.46,
+        "name": "Kuvajt"
+    },
+    {
+        "x": 0.2,
+        "y": 0.29,
+        "name": "Nikósie"
+    },
+    {
+        "x": 0.26,
+        "y": 0.33,
+        "name": "Bejrút"
+    },
+    {
+        "x": 0.89,
+        "y": 0.62,
+        "name": "Maskat"
+    },
+    {
+        "x": 0.56,
+        "y": 0.59,
+        "name": "Rijád"
+    },
+    {
+        "x": 0.36,
+        "y": 0.67,
+        "name": "Mekka"
+    },
+    {
+        "x": 0.78,
+        "y": 0.6,
+        "name": "Abu Dhábí"
+    },
+    {
+        "x": 0.29,
+        "y": 0.34,
+        "name": "Damašek"
+    },
+    {
+        "x": 0.19,
+        "y": 0.16,
+        "name": "Ankara"
+    },
+    {
+        "x": 0.22,
+        "y": 0.4,
+        "name": "Ramalláh"
+    },
+    {
+        "x": 0.08,
+        "y": 0.12,
+        "name": "Istanbul"
+    }
+]
+
 //set data
 
 /*let questions = []
@@ -190,13 +303,32 @@ function shuffle(array) {
 }
 
 let currentWantedIndex = 0;
+let data = data1
 
-document.body.onload = () => {
+let datasetToggler = document.querySelector("#datasetToggler")
+datasetToggler.onclick = (e) => {
+    let source = datasetToggler.dataset.source
+    if (source === "capitals") {
+        data = data2
+        create()
+        datasetToggler.innerText = "Přírodní podmínky"
+        datasetToggler.dataset.source = "nature"
+    }
+    if (source === "nature")  {
+        data = data1
+        create()
+        datasetToggler.innerText = "Hlavní města"
+        datasetToggler.dataset.source = "capitals"
+    }
+}
+
+function create() {
     let bg = document.querySelector("#quizBackgroundImg")
     let inputsParent = document.querySelector("#quizInputWrapper")
     let quizTargetName = document.querySelector("#quizTargetName")
     let quizMessageElement = document.querySelector("#quizMessage")
     let quizQuestionCount = document.querySelector("#quizQuestionCount")
+    let showResult = document.querySelector("#showResult")
     let shuffledData = [...shuffle(data)]
     let wrongNum = 0
 
@@ -205,6 +337,8 @@ document.body.onload = () => {
 
     inputsParent.style.width = `${imgX}px`
     inputsParent.style.height = `${imgY}px`
+
+    inputsParent.innerHTML = ""
 
     shuffledData.map((point,i) => {
         let input = document.createElement("input")
@@ -221,7 +355,7 @@ document.body.onload = () => {
         el.addEventListener("change", function () {
             let selectedIndex = parseInt(el.name)
 
-            if (selectedIndex === data.length - 1) {
+            if (selectedIndex === shuffledData.length - 1) {
                 alert("Jsi u konce! Počet chyb: " + wrongNum)
                 currentWantedIndex = 0;
                 quizTargetName.innerText = shuffledData[currentWantedIndex].name
@@ -252,8 +386,17 @@ document.body.onload = () => {
         });
     });
 
+    showResult.onclick = () => {
+        let wanted = document.querySelector(`input[name='${currentWantedIndex}']`)
+        wanted.click()
+    }
+
     quizTargetName.innerText = shuffledData[currentWantedIndex].name
     quizQuestionCount.innerText = currentWantedIndex + '/' + shuffledData.length
+}
+
+document.body.onload = () => {
+    create()
 }
 
 onresize = () => {

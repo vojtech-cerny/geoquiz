@@ -355,7 +355,7 @@ function create() {
         el.addEventListener("change", function () {
             let selectedIndex = parseInt(el.name)
 
-            if (selectedIndex === shuffledData.length - 1) {
+            if (currentWantedIndex === shuffledData.length - 1) {
                 alert("Jsi u konce! Počet chyb: " + wrongNum)
                 currentWantedIndex = 0;
                 quizTargetName.innerText = shuffledData[currentWantedIndex].name

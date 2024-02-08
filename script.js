@@ -198,6 +198,7 @@ document.body.onload = () => {
     let quizMessageElement = document.querySelector("#quizMessage")
     let quizQuestionCount = document.querySelector("#quizQuestionCount")
     let shuffledData = [...shuffle(data)]
+    let wrongNum = 0
 
     let imgX = bg.offsetWidth
     let imgY = bg.offsetHeight
@@ -221,7 +222,7 @@ document.body.onload = () => {
             let selectedIndex = parseInt(el.name)
 
             if (selectedIndex === data.length - 1) {
-                alert("Jsi u konce!")
+                alert("Jsi u konce! Počet chyb: " + wrongNum)
                 currentWantedIndex = 0;
                 quizTargetName.innerText = shuffledData[currentWantedIndex].name
                 quizQuestionCount.innerText = currentWantedIndex + '/' + shuffledData.length
@@ -230,6 +231,8 @@ document.body.onload = () => {
                     el.dataset.isGuessed = false
                     el.checked = false
                 })
+                wrongNum = 0
+                location.reload()
                 return;
             }
 
@@ -243,6 +246,7 @@ document.body.onload = () => {
             } else {
                 quizMessageElement.innerText = `Špatně (${shuffledData[selectedIndex].name})`
                 el.checked = false
+                wrongNum++
             }
 
         });
